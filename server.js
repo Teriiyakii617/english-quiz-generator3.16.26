@@ -17,7 +17,7 @@ const AI_CONFIG = {
 
 console.log('🔧 AI 配置: SiliconFlow Qwen2-7B (免费额度)');
 
-app.use(cors());
+app.use(cors());app.use(express.static('.'));
 app.use(express.static('.'));
 app.use(express.json());
 app.use(express.static('public'));
