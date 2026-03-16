@@ -1,0 +1,15 @@
+{
+  "name": "english-quiz-generator",
+  "version": "1.0.0",
+  "description": "英语练习题生成器 - 上传Word文档生成练习题",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mammoth": "^1.6.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}

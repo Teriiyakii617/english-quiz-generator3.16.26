@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎓 英语练习题生成器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎓 英语练习题生成器</h1>
+      <p class="subtitle">上传 Word 文档，自动生成英语练习题</p>
+    </header>
+
+    <!-- API Key 配置 -->
+    <div class="upload-card" style="margin-bottom: 20px;">
+      <details>
+        <summary style="cursor: pointer; color: #667eea; font-weight: 600;">⚙️ API 配置（点击展开）</summary>
+        <div style="margin-top: 15px;">
+          <label style="display: block; margin-bottom: 8px; color: #666;">API Key（支持 Kimi/MiniMax/硅基流动等）：</label>
+          <input type="password" id="apiKeyInput" placeholder="输入 API Key" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+          <button onclick="saveApiKey()" style="margin-top: 10px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer;">保存</button>
+          <span id="apiKeyStatus" style="margin-left: 10px; color: #4caf50;"></span>
+        </div>
+      </details>
+    </div>
+
+    <!-- 上传区域 -->
+    <section class="upload-section" id="uploadSection">
+      <div class="upload-card">
+        <h2>📄 上传文档</h2>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="fileInput" accept=".doc,.docx" hidden>
+          <div class="upload-icon">📁</div>
+          <p class="upload-text">点击或拖拽上传 Word 文档</p>
+          <p class="upload-hint">支持 .doc 和 .docx 格式</p>
+        </div>
+        
+        <div class="file-info" id="fileInfo" style="display: none;">
+          <div class="file-name" id="fileName"></div>
+          <button class="remove-btn" id="removeBtn">✕ 移除</button>
+        </div>
+
+        <div class="quiz-type-selector">
+          <h3>选择题目类型：</h3>
+          <div class="type-options">
+            <label class="type-option">
+              <input type="radio" name="quizType" value="fillBlank" checked>
+              <span class="option-card">
+                <span class="option-icon">✏️</span>
+                <span class="option-title">填空题</span>
+                <span class="option-desc">挖空重要词汇进行练习</span>
+              </span>
+            </label>
+            <label class="type-option">
+              <input type="radio" name="quizType" value="vocabulary">
+              <span class="option-card">
+                <span class="option-icon">📚</span>
+                <span class="option-title">词汇练习</span>
+                <span class="option-desc">测试单词意思和用法</span>
+              </span>
+            </label>
+            <label class="type-option">
+              <input type="radio" name="quizType" value="speaking">
+              <span class="option-card">
+                <span class="option-icon">🗣️</span>
+                <span class="option-title">口语练习</span>
+                <span class="option-desc">根据文章内容练习口语</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn" disabled>
+          ✨ 生成练习题
+        </button>
+
+        <div class="loading" id="loading" style="display: none;">
+          <div class="spinner"></div>
+          <p>正在分析文档并生成题目...</p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+      </div>
+    </section>
+
+    <!-- 答题区域 -->
+    <section class="quiz-section" id="quizSection" style="display: none;">
+      <div class="quiz-header">
+        <button class="back-btn" id="backBtn">← 返回上传</button>
+        <h2 id="quizTitle"></h2>
+        <div class="quiz-meta">
+          <span class="quiz-type-badge" id="quizTypeBadge"></span>
+          <span class="question-count" id="questionCount"></span>
+        </div>
+      </div>
+
+      <div class="quiz-content" id="quizContent">
+        <!-- 题目将在这里动态生成 -->
+      </div>
+
+      <div class="quiz-actions">
+        <button class="submit-btn" id="submitBtn">✅ 提交答案</button>
+      </div>
+
+      <div class="results" id="results" style="display: none;">
+        <h3>📊 练习结果</h3>
+        <div class="score-display" id="scoreDisplay"></div>
+        <div class="review-section" id="reviewSection">
+          <h4>查看答案与解析：</h4>
+          <div id="reviewContent"></div>
+        </div>
+        <button class="retry-btn" id="retryBtn">🔄 重新练习</button>
+      </div>
+    </section>
+
+    <!-- 历史记录 -->
+    <section class="history-section" id="historySection">
+      <h2>📋 历史练习</h2>
+      <div class="history-list" id="historyList">
+        <p class="empty-hint">暂无历史记录</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
